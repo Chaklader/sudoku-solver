@@ -1,3 +1,73 @@
+# Introduction to Artificial Intelligence
+
+## A* Search Algorithm Lecture Notes
+
+**Basic Concept**
+A* (pronounced "A-star") is a popular pathfinding algorithm that combines the strengths of both Dijkstra's algorithm and greedy best-first search. Think of it as a smart navigator that knows both how far you've traveled and estimates how far you still need to go. It's widely used in applications ranging from video games to robotics, where finding the optimal path while balancing computational efficiency is crucial.
+
+**Technical Details**
+The algorithm maintains two sets of nodes: an open set (nodes to be evaluated) and a closed set (already evaluated nodes). For each node, A* calculates a score f(n) that represents the estimated total cost of the path through that node. This score is composed of two parts: g(n), the actual cost from the start node to the current node, and h(n), a heuristic estimate of the cost from the current node to the goal. The heuristic must be admissible (never overestimate the actual cost) to guarantee optimal results.
+
+**Mathematical Formulation**
+
+```
+f(n) = g(n) + h(n)
+
+Where:
+f(n) = total estimated cost of path through node n
+g(n) = cost of path from start node to node n
+h(n) = heuristic estimate of cost from n to goal
+
+Common heuristics include:
+- Manhattan distance: h(n) = |x1 - x2| + |y1 - y2|
+- Euclidean distance: h(n) = √[(x1 - x2)² + (y1 - y2)²]
+- Diagonal distance: h(n) = max(|x1 - x2|, |y1 - y2|)
+```
+
+# Bayes' Rule and Probability Lecture Notes (Monty Hall)
+
+# Monty Hall Problem Complete Lecture Notes
+
+**Basic Concept**
+The Monty Hall problem demonstrates how conditional probability can defy our intuition. When a host shows you an empty door after your initial choice, the probability of winning by switching is actually 2/3, not the seemingly intuitive 1/2.
+
+**Technical Details**
+We can solve this using two key probability equations:
+1. The total probability formula (from previous equation) showing P(OpenB) = 1/2
+2. The conditional probability formula showing the likelihood of the car being behind door C given that Monty opened door B
+
+**Mathematical Formulation**
+```
+First equation (Total Probability):
+P(OpenB) = P(CarA) * P(OpenB | CarA)
+         + P(CarB) * P(OpenB | CarB)
+         + P(CarC) * P(OpenB | CarC)
+         = 1/3 * 1/2 + 1/3 * 0 + 1/3 * 1
+         = 1/2
+
+Second equation (Conditional Probability):
+P(CarC | OpenB) = (P(OpenB | CarC) * P(CarC)) / P(OpenB)
+                = (1 * 1/3) / 1/2
+                = 2/3
+```
+
+Therefore, when you choose door A and Monty opens door B:
+- Probability car is behind door A = 1/3 (unchanged)
+- Probability car is behind door B = 0 (we see it's empty)
+- Probability car is behind door C = 2/3 (calculated above)
+
+This mathematical proof confirms that switching to door C gives you a 2/3 chance of winning, double the probability of staying with your original choice!
+
+
+
+# Solving Sdukoes Using Artificial Intelligence 
+
+![Constraint Propagation](./images/constraint_propagation.png)
+
+This strategy is build on repititive application of a series of constraint propagation rules (elimination and only choice) to reduce the search space.
+
+
+
 Constraint Satisfaction Problems
 –––––––––––––––––––––––
 
@@ -538,7 +608,7 @@ backtracking algorithms. Let's break down how it works, using the Australia map 
 3. Step-by-step Explanation:
 
    a. Initial State (Row 1):
-      - All regions (WA, NT, Q, NSW, V, SA, T) have all three colors available.
+      - All regions (WA, NT, SA, Q, NSW, V, T) have all three colors available.
 
    b. After Assigning WA (Row 2):
       - WA is colored orange.
@@ -807,8 +877,3 @@ Structured CSPs and topological sorting techniques offer powerful ways to tackle
 efficiently. By recognizing and exploiting the inherent structure in these problems, we can significantly reduce the search space 
 and develop more effective solving strategies. The Australia map coloring example demonstrates how a seemingly complex problem 
 can be broken down into manageable subproblems, leading to a dramatic reduction in computational complexity.
-
-
-
-
-
