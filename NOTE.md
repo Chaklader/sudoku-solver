@@ -68,9 +68,12 @@ This strategy is build on repititive application of a series of constraint propa
 
 
 
-Constraint Satisfaction Problems
-–––––––––––––––––––––––
+# Constraint Satisfaction Problems
 
+An intelligent agent can solve problems by adopting goals and aim to satisfy them. Constraint Satisfaction Problems or CSP is a problem-solving algorithm that eliminates large portions of the search space and identifies variable and value combinations that violate the constraints.
+
+
+## Constraint Satisfaction Problems Definition
 
 Solving for an airline scheduling problem can be very tedious and risky. An optimal solution must consider all relevant 
 variables, their interdependencies, and any restrictions to avoid flight delays and catastrophic events. A job scheduling 
@@ -86,7 +89,7 @@ Constraint Satisfaction Problems can be framed as a Triple <X, D, C> as follows:
 3. C is a set of constraints that specify allowable combinations of variables and values.
 
 
-Examples 
+### CSP Examples
 
 Sudoku
 ––––––
@@ -136,6 +139,28 @@ Di = {red , green , blue }
 C = {SA≠WA, SA≠NT, SA≠Q, SA≠NSW, SA≠V, WA≠NT,NT≠Q, Q≠NSW, NSW≠V}
 
 
+Map Coloring CSP
+Goal: color each region with the least number of colors, in such a way that no neighboring regions have the same color.
+
+Map coloring CSP definitions:
+
+Variables: X = {WA, NT, Q, NSW, V, SA, T}
+Domains: Di = {orange , green , blue}
+Constraints: C = {SA≠WA, SA≠NT, SA≠Q, SA≠NSW, SA≠V, WA≠NT,NT≠Q, Q≠NSW, NSW≠V}
+Possible solution: {WA=orange, NT=green, Q=orange, NSW=green, V=orange, SA=blue, T=green }
+
+
+Constraint Graph
+A constraint graph in CSP is a special case of graph data structure. Just like any other graph data structures, a constraint graph consists of:
+
+Nodes (also called vertices): correspond to CSP variables, and
+Edges (also called links): correspond to the constraints between the connected variables.
+Representing CSP in a constraint graph helps to visualize the underlying structure and relationships among CSP variables and constraints.
+
+In the next course, we will learn to use graph search algorithms. We can search a constraint graph for finding CSP solutions. However, formulating a problem as a CSP can be more efficient than a search problem-solving algorithm because CSP solvers can eliminate large states as defined in CSP constraints.
+
+
+
 Variations on CSP formalism
 
 1. unary constraint: restricts the value of a single variable. For example, in the map-coloring problem, we can assign 
@@ -146,20 +171,18 @@ as ⟨(X1, X2), X1≠X2⟩.
 
 
 
-Backtracking Search for Constraint Satisfaction Problems
+### Backtracking Search for Constraint Satisfaction Problems
 
+Introduction to Backtracking Search:
+Backtracking search is a fundamental algorithm for solving Constraint Satisfaction Problems (CSPs). It systematically explores the space of possible assignments, backtracking when it encounters conflicts. This method is particularly useful for problems where we need to find a solution that satisfies a set of constraints.
 
-
-1. Introduction to Backtracking Search:
-   Backtracking search is a fundamental algorithm for solving Constraint Satisfaction Problems (CSPs). It systematically explores the space of possible assignments, backtracking when it encounters conflicts. This method is particularly useful for problems where we need to find a solution that satisfies a set of constraints.
-
-2. Constraint Satisfaction Problem (CSP) Recap:
+Constraint Satisfaction Problem (CSP) Recap:
    A CSP is defined by:
    - X: A set of variables {X1, ..., Xn}
    - D: Domains for each variable {D1, ..., Dn}
    - C: A set of constraints specifying allowable combinations of values
 
-3. Backtracking Search Algorithm:
+Backtracking Search Algorithm:
    Let's examine the pseudocode in detail:
 
    ```textmate
@@ -178,21 +201,22 @@ Backtracking Search for Constraint Satisfaction Problems
        return failure
    ```
 
-4. BACKTRACKING-SEARCH Function:
+BACKTRACKING-SEARCH Function:
    - Entry point for the search process
    - Initializes an empty assignment and calls RECURSIVE-BACKTRACK
    - Returns either a solution (complete assignment) or failure
 
-5. RECURSIVE-BACKTRACK Function:
-   - Core of the backtracking algorithm
-   - Recursively builds a solution by assigning values to variables
-   - Key steps:
-     a) Check if the assignment is complete
-     b) Select an unassigned variable
-     c) Try values for the selected variable
-     d) Recursively continue or backtrack if necessary
+RECURSIVE-BACKTRACK Function:
+- Core of the backtracking algorithm
+- Recursively builds a solution by assigning values to variables
+- Key steps:
+   a) Check if the assignment is complete
+   b) Select an unassigned variable
+   c) Try values for the selected variable
+   d) Recursively continue or backtrack if necessary
 
-6. Key Helper Functions:
+
+Key Helper Functions:
    a) SELECT-UNASSIGNED-VARIABLE(VARIABLES[csp], assignment, csp):
       - Chooses the next variable to assign
       - Can significantly impact efficiency (e.g., Minimum Remaining Values heuristic)
@@ -205,46 +229,47 @@ Backtracking Search for Constraint Satisfaction Problems
       - Represents the set of constraints in the CSP
       - Used to check if an assignment is consistent
 
-7. Backtracking Mechanism:
+
+Backtracking Mechanism:
    - When a conflict is detected, the algorithm "backtracks" to the previous variable
    - This is implemented by the for-loop and the removal of inconsistent assignments
 
-8. Completeness and Optimality:
+Completeness and Optimality:
    - Backtracking search is complete: it will find a solution if one exists
    - It's not necessarily optimal: it finds a solution, not the best solution
 
-9. Time Complexity:
+Time Complexity:
    - Worst-case: O(d^n), where d is the size of the largest domain and n is the number of variables
    - Best-case: O(n), when the first tried assignment leads to a solution
 
-10. Space Complexity:
-    - O(n), as the depth of the recursion is at most the number of variables
+Space Complexity:
+   - O(n), as the depth of the recursion is at most the number of variables
 
-11. Improving Efficiency:
-    - Variable ordering: Choose variables that are more likely to fail early
-    - Value ordering: Try values that are more likely to succeed first
-    - Forward checking: Prune domain values that would violate constraints
-    - Constraint propagation: Infer the implications of an assignment
+Improving Efficiency:
+   - Variable ordering: Choose variables that are more likely to fail early
+   - Value ordering: Try values that are more likely to succeed first
+   - Forward checking: Prune domain values that would violate constraints
+   - Constraint propagation: Infer the implications of an assignment
 
-12. Applications:
-    - Sudoku solving
-    - Map coloring
-    - N-Queens problem
-    - Scheduling problems
-    - Resource allocation
+Applications:
+   - Sudoku solving
+   - Map coloring
+   - N-Queens problem
+   - Scheduling problems
+   - Resource allocation
 
-13. Variations and Extensions:
-    - Arc consistency algorithms (AC-3)
-    - Conflict-directed backjumping
-    - Min-conflicts local search
+Variations and Extensions:
+   - Arc consistency algorithms (AC-3)
+   - Conflict-directed backjumping
+   - Min-conflicts local search
 
-14. Limitations:
-    - Can be inefficient for large or complex problems
-    - May require additional heuristics or optimizations for practical use in challenging scenarios
+Limitations:
+   - Can be inefficient for large or complex problems
+   - May require additional heuristics or optimizations for practical use in challenging scenarios
 
-15. Comparison with Other Approaches:
-    - More efficient than generate-and-test for most problems
-    - Can be outperformed by more advanced techniques like constraint propagation or local search in some cases
+Comparison with Other Approaches:
+   - More efficient than generate-and-test for most problems
+   - Can be outperformed by more advanced techniques like constraint propagation or local search in some cases
 
 
 This backtracking search algorithm provides a systematic way to explore the solution space of CSPs, using recursive depth-first 
@@ -474,6 +499,7 @@ Local Search for CSPs
    - Backtracking is complete (guaranteed to find a solution if one exists); local search is not
 
 10. Hybrid Approaches:
+
     - Some algorithms combine local search with systematic search methods
     - Can leverage the strengths of both approaches
 
@@ -728,7 +754,7 @@ Arc Consistency check:
 
 
 Constraint propagation, particularly arc consistency, is a powerful technique in solving CSPs. By reducing domains and 
-detecting inconsistencies early, it significantly enhances the efficiency of search algorithms. Understanding and implementing 4
+detecting inconsistencies early, it significantly enhances the efficiency of search algorithms. Understanding and implementing 
 these concepts are crucial for developing effective CSP solvers.
 
 
