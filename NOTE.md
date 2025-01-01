@@ -60,6 +60,16 @@ This mathematical proof confirms that switching to door C gives you a 2/3 chance
 
 
 
+## Naked Twins
+
+The naked twins strategy says that if you have two or more unallocated boxes in a unit and there are only two digits that can go in those two boxes, then those two digits can be eliminated from the possible assignments of all other boxes in the same unit.
+
+This pseudocode is accurate, but it isn't very efficient.  You should discuss the other strategies with your peers to look for more efficient implementations. 
+
+Note: It is best to treat the input to this function as immutable. Mutating the state during execution can cause unexpected results during testing because mutating the input can erase pairs of naked twins before they're discovered. 
+
+
+
 # Solving Sdukoes Using Artificial Intelligence 
 
 ![Constraint Propagation](./images/constraint_propagation.png)
@@ -275,6 +285,59 @@ Comparison with Other Approaches:
 This backtracking search algorithm provides a systematic way to explore the solution space of CSPs, using recursive depth-first 
 search with the ability to backtrack when conflicts are encountered. Its effectiveness can be enhanced through careful selection 
 of variables and value ordering strategies, as well as additional techniques like forward checking and constraint propagation.
+
+
+Search in CSPs
+The basic idea of searching for a solution in a CSP is that you guess assignments var = value in order to advance to the next state until every variable is assigned to a valid value.
+
+If we used a standard depth-first search (which we'll cover in detail in a later module), then for n variables each with d possible values the branching factor of the resulting tree would be nd at the top level, (n-1)d at the second level, (n-2)d at the next level, and so on. The total branching factor would be n! d^n when there are only d^n possible assignments.
+
+The animation below shows the node search order using depth-first search with two variables: (i) A which can be assigned a value in (0, 1, 2), and (ii) B which can be assigned a value in (0, 1).
+
+Note that there are 1x3+1x2=5 children of the root node, and a total of 2x3 + 3x2=12 leaf nodes–every possible solution assignment is tested twice—and we'll test many partial solutions that are inconsistent (at least one constraint is violated by the partial assignment). These are exactly the problems that backtracking fixes.
+
+
+
+
+Backtracking to avoid redundancy
+The depth-first search tries both assigning A before B and assigning B before A. But the order of the assignments doesn't matter in finding a solution, so only one possible order needs to be tested. Backtracking is identical to depth-first search order, but it only evaluates a single assignment order for the variables and it reverts an assignment whenever the current state is inconsistent with any of the problem constraints. Backtracking will typically find a solution faster than a depth-first search.
+
+One key feature of backtracking search is that the choice of which variable to assign first and the choice of which value to assign can have a big impact on the efficiency of the search. That'll be the topic of the next lesson.
+
+The animation below shows the node search order on the same problem using one possible assignment order with backtracking search. (Note that we don't have any constraints involved, so it is identical to half of DFS in this case.) The backtracking search chooses one particular assignment order (in this case A is assigned, then B) so there are only 1x3 = 3 children of the root node, and 3x2=6 leaf nodes.
+
+
+Aside: Local Search
+Although we won't spend much time on it in this section, another alternative to depth-first or backtracking search is to use local search for solving CSPs. While depth-first search and backtracking apply variable assignments one at a time, local search always considers complete assignments -- every variable in the problem is always assigned to a concrete value (compare that to the root node of a DFS tree where none of the variables are assigned).
+
+Local search operates by starting with a complete assignment, then modifying one or more of the variable values within some "local neighborhood" of the current assignment. For example, (A=1,B=0) might change to (A=0,B=0) if we define the neighborhood as "a single value can change +/-1" (although other rules could also be chosen).
+
+The animation below shows one possible node search order on the example problem for some notional local search. We will discuss local search in greater detail in the optimization problems lesson later in the course.
+
+#### Improving Backtracking Efficiency
+
+Backtracking algorithm checks which variable should be assigned next. In the pseudocode, the process is done at this line:
+
+`var` ← SELECT-UNASSIGNED-VARIABLE(VARIABLES[csp],assignment,csp)
+
+The greedy strategy to pick the next unassigned variable is not efficient since the algorithm will more likely violate the constraints and has to backtrack more often.
+
+There are three strategies in picking the next variable to improve backtracking efficiency:
+
+Least Constraining Value: choose the variable that rules out the fewest values in the remaining variables.
+Minimum Remaining Value (MRV): choose the variable with the fewest legal values.
+Degree Heuristics: choose the variable with the most constraints on remaining variables.
+
+### Forward Checking
+
+
+We can further improve backtracking algorithm efficiency through inferences. One inference technique in CSP is forward checking. Every time the algorithm has successfully assigned a variable, it can make inferences about a number of unassigned variables and reduce their possible domain values.
+
+The example on Australia regions map coloring CSP below shows forward-checking inferences after four iterations:
+
+![Forward Checking](./images/forward.png)
+
+
 
 
 Backtracking Search Algorithm (C Implementation)
@@ -609,9 +672,6 @@ These strategies are often used in combination. A common approach is:
 2. If there's a tie, use the Degree Heuristic as a tie-breaker
 3. Once a variable is selected, use LCV to choose the value to assign
 
-
-Conclusion:
-
 Choosing the right variable selection strategy or combination of strategies can dramatically improve the efficiency of backtracking 
 algorithms for CSPs. The effectiveness of each strategy can vary depending on the specific problem structure, so it's often beneficial 
 to experiment with different approaches for optimal performance.
@@ -670,6 +730,12 @@ based on the assignments made so far.
 
 
 Constraint Propagation and Arc Consistency in CSPs
+
+
+
+The key advantage of CSP over Search is the ability to make inferences in order to reduce the number of possible values for the remaining variables. Constraint propagation is the repeated inference process to reduce the domains for each variable. Constraint propagation will enforce the consistency in a CSP solution so it does not violate any of the constraints.
+
+Arc Consistency ensures the domain value in a CSP variable satisfies the variable’s binary constraints. In the previous video, we define a binary constraint as a relationship between two variables. In the map coloring CSP, the binary constraints prohibit neighboring regions to have the same colors.
 
 
 1. Introduction to Constraint Propagation
