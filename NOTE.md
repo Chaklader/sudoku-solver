@@ -64,15 +64,18 @@ This mathematical proof confirms that switching to door C gives you a 2/3 chance
 
 The naked twins strategy says that if you have two or more unallocated boxes in a unit and there are only two digits that can go in those two boxes, then those two digits can be eliminated from the possible assignments of all other boxes in the same unit.
 
-This pseudocode is accurate, but it isn't very efficient.  You should discuss the other strategies with your peers to look for more efficient implementations. 
+This pseudocode is accurate, but it isn't very efficient.  You should discuss the other strategies with your peers to look for more efficient implementations.
 
-Note: It is best to treat the input to this function as immutable. Mutating the state during execution can cause unexpected results during testing because mutating the input can erase pairs of naked twins before they're discovered. 
+Note: It is best to treat the input to this function as immutable. Mutating the state during execution can cause unexpected results during testing because mutating the input can erase pairs of naked twins before they're discovered.
 
 
 
-# Solving Sdukoes Using Artificial Intelligence 
+# Solving Sdukoes Using Artificial Intelligence
 
-![Constraint Propagation](./images/constraint_propagation.png)
+<div align="center">
+<img src="images/constraint_propagation.png" width="600" height=auto alt="Constraint Propagation">
+<p>figure: Constraint Propagation</p>
+</div>
 
 This strategy is build on repititive application of a series of constraint propagation rules (elimination and only choice) to reduce the search space.
 
@@ -85,11 +88,11 @@ An intelligent agent can solve problems by adopting goals and aim to satisfy the
 
 ## Constraint Satisfaction Problems Definition
 
-Solving for an airline scheduling problem can be very tedious and risky. An optimal solution must consider all relevant 
-variables, their interdependencies, and any restrictions to avoid flight delays and catastrophic events. A job scheduling 
+Solving for an airline scheduling problem can be very tedious and risky. An optimal solution must consider all relevant
+variables, their interdependencies, and any restrictions to avoid flight delays and catastrophic events. A job scheduling
 task is one of the problems that can be solved with the Constraint Satisfaction Problems (CSP) algorithm.
 
-A Constraint Satisfaction Problem is defined mathematically as a set of variables, a set of domains for each variable, and 
+A Constraint Satisfaction Problem is defined mathematically as a set of variables, a set of domains for each variable, and
 a set of constraints that limit which values in each domain are a valid assignment for each variable.
 
 Constraint Satisfaction Problems can be framed as a Triple <X, D, C> as follows:
@@ -104,8 +107,8 @@ Constraint Satisfaction Problems can be framed as a Triple <X, D, C> as follows:
 Sudoku
 ––––––
 
-Sudoku puzzles are given in a 9x9 grid that is partitioned into non-overlapping 3x3 groups. A puzzle is solved when each 
-of the 81 boxes has been assigned a single digit between 1-9 such that every row, column, and 3x3 group contains precisely 
+Sudoku puzzles are given in a 9x9 grid that is partitioned into non-overlapping 3x3 groups. A puzzle is solved when each
+of the 81 boxes has been assigned a single digit between 1-9 such that every row, column, and 3x3 group contains precisely
 one copy of each digit 1-9.
 
 
@@ -119,8 +122,8 @@ Sudoku CSP Definition
 4-Queens
 ––––––––
 
-The 4-queens problem asks you to place 4 chess queens on a 4x4 grid such that none of the queens are in "check" (i.e., no 
-two queens occupy the same row, column, or diagonal). The problem can be expanded to standard 8x8 chess boards as the "8-queens" 
+The 4-queens problem asks you to place 4 chess queens on a 4x4 grid such that none of the queens are in "check" (i.e., no
+two queens occupy the same row, column, or diagonal). The problem can be expanded to standard 8x8 chess boards as the "8-queens"
 problem, or generalized to any NxN grid as the "N-queens" problem.
 
 
@@ -134,8 +137,8 @@ problem, or generalized to any NxN grid as the "N-queens" problem.
 Map Coloring
 ––––––––––––
 
-Map coloring is a problem that asks for an assignment of distinct colors to each region of the map. (While it seems like a 
-trivial problem, map coloring is an intuitive way to describe more complex equivalent problems relevant in other parts of 
+Map coloring is a problem that asks for an assignment of distinct colors to each region of the map. (While it seems like a
+trivial problem, map coloring is an intuitive way to describe more complex equivalent problems relevant in other parts of
 computer science.)
 
 
@@ -173,9 +176,9 @@ In the next course, we will learn to use graph search algorithms. We can search 
 
 Variations on CSP formalism
 
-1. unary constraint: restricts the value of a single variable. For example, in the map-coloring problem, we can assign 
+1. unary constraint: restricts the value of a single variable. For example, in the map-coloring problem, we can assign
 the Western Australia region with blue color using this representation: ⟨(SA), SA=blue⟩.
-2. binary constraint relates to two variables. For example, no neighboring region can have the same color can be represented 
+2. binary constraint relates to two variables. For example, no neighboring region can have the same color can be represented
 as ⟨(X1, X2), X1≠X2⟩.
 3. AIMA textbook chapter 3 section 6.1.2 and 6.1.3 cover different kinds of variable and constraint variations on CSP .
 
@@ -196,16 +199,16 @@ Backtracking Search Algorithm:
    Let's examine the pseudocode in detail:
 
    ```textmate
-   function BACKTRACKING-SEARCH(csp) returns solution/failure 
+   function BACKTRACKING-SEARCH(csp) returns solution/failure
        return RECURSIVE-BACKTRACK({}, csp)
 
    function RECURSIVE-BACKTRACK(assignment, csp) returns solution/failure
        if assignment is complete then return assignment
        var ← SELECT-UNASSIGNED-VARIABLE(VARIABLES[csp], assignment, csp)
        for each value in ORDER-DOMAIN-VALUES(var, assignment, csp) do
-           if value is consistent with assignment given CONSTRAINTS[csp] then 
-               add {var = value} to assignment 
-               result ← RECURSIVE-BACKTRACK(assignment, csp) 
+           if value is consistent with assignment given CONSTRAINTS[csp] then
+               add {var = value} to assignment
+               result ← RECURSIVE-BACKTRACK(assignment, csp)
                if result ≠ failure then return result
                remove {var = value} from assignment
        return failure
@@ -282,8 +285,8 @@ Comparison with Other Approaches:
    - Can be outperformed by more advanced techniques like constraint propagation or local search in some cases
 
 
-This backtracking search algorithm provides a systematic way to explore the solution space of CSPs, using recursive depth-first 
-search with the ability to backtrack when conflicts are encountered. Its effectiveness can be enhanced through careful selection 
+This backtracking search algorithm provides a systematic way to explore the solution space of CSPs, using recursive depth-first
+search with the ability to backtrack when conflicts are encountered. Its effectiveness can be enhanced through careful selection
 of variables and value ordering strategies, as well as additional techniques like forward checking and constraint propagation.
 
 
@@ -335,8 +338,10 @@ We can further improve backtracking algorithm efficiency through inferences. One
 
 The example on Australia regions map coloring CSP below shows forward-checking inferences after four iterations:
 
-![Forward Checking](./images/forward.png)
-
+<div align="center">
+<img src="images/forward.png" width="600" height=auto alt="Forward Checking">
+<p>figure: Forward Checking</p>
+</div>
 
 
 
@@ -378,7 +383,7 @@ bool recursive_backtrack(int* assignment, CSP* csp) {
     }
 
     int var = select_unassigned_variable(assignment, csp);
-    
+
     for (int i = 0; i < csp->domain_size; i++) {
         int value = csp->domains[var][i];
         assignment[var] = value;
@@ -466,20 +471,20 @@ This implementation includes:
 
 
 
-Note that this implementation uses a simple variable selection strategy (first unassigned variable) and doesn't implement 
-value ordering. For more complex problems, you might want to implement more sophisticated variable and value selection 
-heuristics. Also, the constraint check function is problem-specific. You'll need to implement a different constraint check 
+Note that this implementation uses a simple variable selection strategy (first unassigned variable) and doesn't implement
+value ordering. For more complex problems, you might want to implement more sophisticated variable and value selection
+heuristics. Also, the constraint check function is problem-specific. You'll need to implement a different constraint check
 function for other types of CSPs.
 
 
-The depth-first search tries both assigning A before B and assigning B before A. But the order of the assignments doesn't 
-matter in finding a solution, so only one possible order needs to be tested. Backtracking is identical to depth-first search 
-order, but it only evaluates a single assignment order for the variables and it reverts an assignment whenever the current 
-state is inconsistent with any of the problem constraints. Backtracking will typically find a solution faster than a depth-first 
+The depth-first search tries both assigning A before B and assigning B before A. But the order of the assignments doesn't
+matter in finding a solution, so only one possible order needs to be tested. Backtracking is identical to depth-first search
+order, but it only evaluates a single assignment order for the variables and it reverts an assignment whenever the current
+state is inconsistent with any of the problem constraints. Backtracking will typically find a solution faster than a depth-first
 search.
 
 
-The key differences between backtracking and depth-first search (DFS) in the context of solving Constraint Satisfaction 
+The key differences between backtracking and depth-first search (DFS) in the context of solving Constraint Satisfaction
 Problems (CSPs) are:
 
 1. Variable Order:
@@ -511,8 +516,8 @@ Problems (CSPs) are:
 
 
 
-In summary, backtracking can be seen as a more efficient, constraint-aware version of DFS specifically tailored for solving CSPs. 
-It reduces the search space by immediately backtracking when constraints are violated, leading to faster solution finding in 
+In summary, backtracking can be seen as a more efficient, constraint-aware version of DFS specifically tailored for solving CSPs.
+It reduces the search space by immediately backtracking when constraints are violated, leading to faster solution finding in
 most cases.
 
 
@@ -576,7 +581,7 @@ Local Search for CSPs
     - No improvement over a certain number of steps
 
 
-Local search provides a powerful alternative to traditional backtracking methods for CSPs, especially for large-scale problems 
+Local search provides a powerful alternative to traditional backtracking methods for CSPs, especially for large-scale problems
 where finding an optimal solution may be less critical than finding a good solution quickly.
 
 
@@ -585,7 +590,7 @@ Variable Selection Strategies in Backtracking Algorithms
 
 
 Introduction:
-In backtracking algorithms for Constraint Satisfaction Problems (CSPs), the order in which variables are selected for assignment 
+In backtracking algorithms for Constraint Satisfaction Problems (CSPs), the order in which variables are selected for assignment
 can significantly impact the efficiency of the search. Three key strategies have been developed to improve this selection process:
 
 1. Least Constraining Value (LCV)
@@ -596,7 +601,7 @@ Let's examine each of these in detail:
 
 1. Least Constraining Value (LCV)
 
-Definition: 
+Definition:
 LCV strategy selects the value for a variable that rules out the fewest choices for the neighboring variables in the constraint graph.
 
 Purpose:
@@ -672,15 +677,15 @@ These strategies are often used in combination. A common approach is:
 2. If there's a tie, use the Degree Heuristic as a tie-breaker
 3. Once a variable is selected, use LCV to choose the value to assign
 
-Choosing the right variable selection strategy or combination of strategies can dramatically improve the efficiency of backtracking 
-algorithms for CSPs. The effectiveness of each strategy can vary depending on the specific problem structure, so it's often beneficial 
+Choosing the right variable selection strategy or combination of strategies can dramatically improve the efficiency of backtracking
+algorithms for CSPs. The effectiveness of each strategy can vary depending on the specific problem structure, so it's often beneficial
 to experiment with different approaches for optimal performance.
 
 
 Forward Checking
 
 
-Forward checking is an inference technique used in Constraint Satisfaction Problems (CSPs) to improve the efficiency of 
+Forward checking is an inference technique used in Constraint Satisfaction Problems (CSPs) to improve the efficiency of
 backtracking algorithms. Let's break down how it works, using the Australia map coloring example in the image:
 
 
@@ -723,8 +728,8 @@ backtracking algorithms. Let's break down how it works, using the Australia map 
    The map at the top shows the progressive coloring of the regions, corresponding to the rows in the table below.
 
 
-Forward checking helps in making informed decisions early in the search process, potentially avoiding dead ends and reducing 
-the overall time needed to find a solution. In this example, it quickly narrows down the possible color choices for each region 
+Forward checking helps in making informed decisions early in the search process, potentially avoiding dead ends and reducing
+the overall time needed to find a solution. In this example, it quickly narrows down the possible color choices for each region
 based on the assignments made so far.
 
 
@@ -740,7 +745,7 @@ Arc Consistency ensures the domain value in a CSP variable satisfies the variabl
 
 1. Introduction to Constraint Propagation
 
-Definition: Constraint propagation is a process of using the constraints in a CSP to reduce the domains of variables before 
+Definition: Constraint propagation is a process of using the constraints in a CSP to reduce the domains of variables before
 and during the search process.
 
 Key Points:
@@ -758,7 +763,7 @@ Key Points:
 
 Definition: Arc consistency is a form of constraint propagation that focuses on binary constraints between pairs of variables.
 
-Concept: For any two variables X and Y connected by a constraint, arc consistency ensures that for every value in the domain 
+Concept: For any two variables X and Y connected by a constraint, arc consistency ensures that for every value in the domain
 of X, there is at least one value in the domain of Y that satisfies the constraint.
 
 4. Arc Consistency Algorithm (AC-3)
@@ -819,8 +824,8 @@ Arc Consistency check:
 
 
 
-Constraint propagation, particularly arc consistency, is a powerful technique in solving CSPs. By reducing domains and 
-detecting inconsistencies early, it significantly enhances the efficiency of search algorithms. Understanding and implementing 
+Constraint propagation, particularly arc consistency, is a powerful technique in solving CSPs. By reducing domains and
+detecting inconsistencies early, it significantly enhances the efficiency of search algorithms. Understanding and implementing
 these concepts are crucial for developing effective CSP solvers.
 
 
@@ -891,9 +896,9 @@ d. Output vertices in reverse order of finishing time
 - May require additional preprocessing time
 
 
-Structured CSPs and topological sorting techniques offer powerful ways to tackle complex constraint satisfaction problems 
-more efficiently. By recognizing and exploiting the inherent structure in these problems, we can significantly reduce the 
-search space and develop more effective solving strategies. The Australia map coloring example demonstrates how a seemingly 
+Structured CSPs and topological sorting techniques offer powerful ways to tackle complex constraint satisfaction problems
+more efficiently. By recognizing and exploiting the inherent structure in these problems, we can significantly reduce the
+search space and develop more effective solving strategies. The Australia map coloring example demonstrates how a seemingly
 complex problem can be broken down into manageable subproblems, leading to a dramatic reduction in computational complexity.
 
 
@@ -902,7 +907,7 @@ Structured CSPs and Topological Sorting
 
 1. Introduction to Structured CSPs
 
-Structured CSPs are constraint satisfaction problems that exhibit a particular structure or pattern in their constraint graph. 
+Structured CSPs are constraint satisfaction problems that exhibit a particular structure or pattern in their constraint graph.
 These structures can be exploited to solve the problems more efficiently than general CSPs.
 
 2. Example from the Image: Australia Map Coloring
@@ -965,7 +970,7 @@ d. Output vertices in reverse order of finishing time
 - May require additional preprocessing time
 
 
-Structured CSPs and topological sorting techniques offer powerful ways to tackle complex constraint satisfaction problems more 
-efficiently. By recognizing and exploiting the inherent structure in these problems, we can significantly reduce the search space 
-and develop more effective solving strategies. The Australia map coloring example demonstrates how a seemingly complex problem 
+Structured CSPs and topological sorting techniques offer powerful ways to tackle complex constraint satisfaction problems more
+efficiently. By recognizing and exploiting the inherent structure in these problems, we can significantly reduce the search space
+and develop more effective solving strategies. The Australia map coloring example demonstrates how a seemingly complex problem
 can be broken down into manageable subproblems, leading to a dramatic reduction in computational complexity.
