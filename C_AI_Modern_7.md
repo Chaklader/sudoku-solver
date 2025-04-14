@@ -20,4 +20,3 @@
     - Heuristics for SAT Solving
     - Local Search for Satisfiability
     - The Threshold Phenomenon in Random SAT
-
