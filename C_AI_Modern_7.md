@@ -528,3 +528,158 @@
     - Application to Robot Control
         - Cart-Pole Balancing
         - Helicopter Flight
+
+# C-20 | S-6: Natural Language Processing
+
+1. Language Models
+    - The Bag-of-Words Model
+    - N-gram Word Models
+    - Other N-gram Models
+    - Smoothing N-gram Models
+    - Word Representations
+    - Part-of-Speech (POS) Tagging
+    - Comparing Language Models
+2. Grammar
+    - The Lexicon of E₀
+    - Formal Grammars and Language Definitions
+    - Syntactic Categories and Phrase Structure
+3. Parsing
+    - Top-Down vs. Bottom-Up Parsing
+    - Chart Parsing and the CYK Algorithm
+    - Chomsky Normal Form
+    - Dependency Parsing
+    - Learning a Parser from Examples
+4. Augmented Grammars
+    - Agreement Features and Subcategories
+    - Semantic Interpretation
+    - Learning Semantic Grammars
+5. Complications of Real Natural Language
+    - Quantification
+    - Pragmatics and Indexicals
+    - Long-Distance Dependencies
+    - Time and Tense
+    - Ambiguity (Lexical, Syntactic, Semantic)
+    - Metaphor and Metonymy
+    - Disambiguation Methods
+6. Natural Language Tasks
+    - Speech Recognition and Text-to-Speech
+    - Machine Translation
+    - Information Extraction
+    - Information Retrieval
+    - Question Answering
+
+# C-21 | S-6: Deep Learning for Natural Language Processing
+
+1. Word Embeddings
+    - From One-Hot Vectors to Continuous Representations
+    - Properties of Word Embedding Spaces
+    - Applications of Word Embeddings
+2. Recurrent Neural Networks for NLP
+    - Language Models with RNNs
+    - Classification with RNNs
+    - LSTMs for NLP Tasks
+    - Bidirectional RNNs
+3. Sequence-to-Sequence Models
+    - Basic Structure and Limitations
+    - Attention Mechanisms
+    - Decoding Methods (Greedy vs. Beam Search)
+    - Applications in Machine Translation
+4. The Transformer Architecture
+    - Self-Attention
+    - Positional Encoding
+    - Transformer Encoder-Decoder Structure
+5. Pretraining and Transfer Learning
+    - Pretrained Word Embeddings
+    - Pretrained Contextual Representations
+    - Masked Language Models
+    - Fine-Tuning for Specific Tasks
+6. State of the Art
+    - Language Models (GPT, T5)
+    - Question Answering and Reading Comprehension
+    - Limitations and Future Directions
+
+# C-22 | S-6: Computer Vision
+
+1. Image Formation
+    - Pinhole Camera Model
+    - Perspective Projection
+    - Lens Systems
+    - Scaled Orthographic Projection
+    - Light and Shading
+    - Color and Trichromacy
+2. Simple Image Features
+    - Edges and Edge Detection
+    - Texture Representation
+    - Optical Flow
+    - Segmentation of Natural Images
+3. Classifying Images
+    - Appearance Variation Challenges
+    - Convolutional Neural Networks for Classification
+    - Feature Learning and Transfer
+    - Data Augmentation Techniques
+4. Detecting Objects
+    - Bounding Box Representation
+    - Regional Proposal Networks
+    - Non-Maximum Suppression
+    - Bounding Box Regression
+5. The 3D World
+    - 3D Cues from Multiple Views
+    - Binocular Stereopsis
+    - 3D Cues from Moving Cameras
+    - 3D Cues from a Single View
+6. Using Computer Vision
+    - Human Action Understanding
+    - Linking Pictures and Words (Captioning, VQA)
+    - Reconstruction from Multiple Views
+    - Geometry from a Single View
+    - Image Generation and Transformation
+    - Vision for Movement Control
+
+# C-23 | S-6: Robotics
+
+1. Robot Hardware
+    - Types of Robots (Manipulators, Mobile, Legged)
+    - Sensing the World (Active/Passive Sensors)
+    - Effectors and Motion Production
+2. Problem Formulation in Robotics
+    - Computational Frameworks (MDPs, POMDPs, Games)
+    - Hierarchical Planning Decomposition
+    - Preference Learning and People Prediction
+3. Robotic Perception
+    - State Estimation and Filtering
+    - Localization and Mapping
+    - SLAM and Other Perception Types
+    - Machine Learning in Perception
+4. Planning and Control
+    - Configuration Space
+    - Motion Planning Algorithms
+    - Trajectory Tracking Control
+    - Optimal Control Approaches
+5. Planning Uncertain Movements
+    - Online Replanning
+    - Model Predictive Control
+    - Information Gathering Actions
+    - Guarded Movements
+6. Reinforcement Learning in Robotics
+    - Exploiting Models
+    - Sim-to-Real Transfer
+    - Domain Randomization
+    - Sample Efficiency Techniques
+7. Humans and Robots
+    - Coordination Challenges
+    - Game Theory Approaches
+    - Predicting Human Actions
+    - Learning Human Preferences
+    - Imitation Learning
+8. Alternative Robotic Frameworks
+    - Reactive Controllers
+    - Subsumption Architecture
+    - Limitations of Different Approaches
+9. Application Domains
+    - Home Care and Assistance
+    - Healthcare and Surgery
+    - Service Robots and Delivery
+    - Autonomous Vehicles
+    - Entertainment and Animatronics
+    - Exploration and Hazardous Environments
+    - Industrial Automation
