@@ -4,6 +4,7 @@ from functools import reduce
 row_units = [cross(r, cols) for r in rows]
 column_units = [cross(rows, c) for c in cols]
 square_units = [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123', '456', '789')]
+
 unitlist = row_units + column_units + square_units
 
 diag1 = [rows[i] + cols[i] for i in range(len(rows))]
