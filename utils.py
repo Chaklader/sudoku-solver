@@ -25,11 +25,13 @@ def extract_units(unitlist, boxes):
     """
     # the value for keys that aren't in the dictionary are initialized as an empty list
     units = defaultdict(list)
+    
     for current_box in boxes:
         for unit in unitlist:
             if current_box in unit:
                 # defaultdict avoids this raising a KeyError when new keys are added
                 units[current_box].append(unit)
+
     return units
 
 
