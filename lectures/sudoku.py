@@ -1,6 +1,6 @@
 import sys, os, random, pygame
 sys.path.append(os.path.join("objects"))
-import SudokuSquare
+from sudoku_square import SudokuSquare
 from utils import *
 from GameResources import *
 
@@ -37,7 +37,7 @@ def play(values, result, history):
                     number = None
                 else:
                     number = int(string_number)
-                theSquares.append(SudokuSquare.SudokuSquare(number, startX, startY, editable, x, y))
+                theSquares.append(SudokuSquare(number, startX, startY, editable, x, y))
 
         screen.blit(background_image, (0, 0))
         for num in theSquares:
